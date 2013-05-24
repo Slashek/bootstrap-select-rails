@@ -2,6 +2,11 @@
 
 Assets for https://github.com/silviomoreto/bootstrap-select - see it for details
 
+add to application.js and application.css something like
+
+    //= require bootstrap-select
+
+
 ## Installation
 
 Add this line to your application's Gemfile:
