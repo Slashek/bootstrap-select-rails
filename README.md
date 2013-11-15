@@ -6,6 +6,12 @@ add to application.js and application.css something like
 
     //= require bootstrap-select
 
+Also, you must require at least the *alert* and *dropdown* bootstrap components.
+For example, if using
+[bootstrap-sass-rails](https://github.com/yabawock/bootstrap-sass-rails):
+
+    //= require twitter/bootstrap/alert
+    //= require twitter/bootstrap/dropdown
 
 ## Installation
 
