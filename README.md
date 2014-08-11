@@ -8,7 +8,7 @@ add to application.js and application.css something like
 
 Also, you must require at least the *alert* and *dropdown* bootstrap components.
 For example, if using
-[bootstrap-sass-rails](https://github.com/yabawock/bootstrap-sass-rails):
+[bootstrap-sass](https://github.com/twbs/bootstrap-sass):
 
     //= require bootstrap/alert
     //= require bootstrap/dropdown
