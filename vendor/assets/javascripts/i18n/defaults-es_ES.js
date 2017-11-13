@@ -1,7 +1,7 @@
 /*
  * Translated default messages for bootstrap-select.
  * Locale: ES (Spanish)
- * Region: CL (Chile)
+ * Region: ES (Spain)
  */
 (function ($) {
   $.fn.selectpicker.defaults = {
