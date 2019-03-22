@@ -7,13 +7,13 @@
 
 @mixin box-sizing($fmt) {
   -webkit-box-sizing: $fmt;
-     -moz-box-sizing: $fmt;
-          box-sizing: $fmt;
+  -moz-box-sizing: $fmt;
+  box-sizing: $fmt;
 }
 
 @mixin box-shadow($fmt) {
   -webkit-box-shadow: $fmt;
-          box-shadow: $fmt;
+  box-shadow: $fmt;
 }
 
 @function fade($color, $amnt) {
@@ -32,19 +32,46 @@ select.selectpicker {
 
 .bootstrap-select {
   width: 220px \0; /*IE9 and below*/
+  vertical-align: middle;
 
   // The selectpicker button
   > .dropdown-toggle {
     position: relative;
     width: 100%;
-    z-index: 1;
     // necessary for proper positioning of caret in Bootstrap 4 (pushes caret to the right)
     text-align: right;
+    white-space: nowrap;
+    // vertically center the caret for Bootstrap 4
+    display: inline-flex;
+    align-items: center;
 
-    &.bs-placeholder,
-    &.bs-placeholder:hover,
-    &.bs-placeholder:focus,
-    &.bs-placeholder:active { color: $input-color-placeholder; }
+    &:after {
+      margin-top: -1px;
+      margin-left: auto;
+    }
+
+    &.bs-placeholder {
+      &,
+      &:hover,
+      &:focus,
+      &:active {
+        color: $input-color-placeholder;
+      }
+
+      &.btn-primary,
+      &.btn-secondary,
+      &.btn-success,
+      &.btn-danger,
+      &.btn-info,
+      &.btn-dark {
+        &,
+        &:hover,
+        &:focus,
+        &:active {
+          color: $input-alt-color-placeholder;
+        }
+      }
+    }
   }
 
   > select {
@@ -57,6 +84,7 @@ select.selectpicker {
     padding: 0 !important;
     opacity: 0 !important;
     border: none;
+    z-index: 0 !important;
 
     &.mobile-device {
       top: 0;
@@ -88,6 +116,7 @@ select.selectpicker {
     width: $width-default;
   }
 
+  > select.mobile-device:focus + .dropdown-toggle,
   .dropdown-toggle:focus {
     outline: thin dotted #333333 !important;
     outline: 5px auto -webkit-focus-ring-color !important;
@@ -95,28 +124,29 @@ select.selectpicker {
   }
 }
 
-.bootstrap-select.form-control {
-  margin-bottom: 0;
-  padding: 0;
-  border: none;
-
-  :not(.input-group) > &:not([class*="col-"]) {
-    width: 100%;
-  }
-
-  &.input-group-btn {
-    z-index: auto;
-
-    &:not(:first-child):not(:last-child) {
-      > .btn {
-        border-radius: 0;
-      }
-    }
-  }
-}
-
 // The selectpicker components
 .bootstrap-select {
+  &.form-control {
+    margin-bottom: 0;
+    padding: 0;
+    border: none;
+
+    :not(.input-group) > &:not([class*="col-"]) {
+      width: 100%;
+    }
+
+    .input-group &,
+    &.input-group-btn {
+      display: table-cell;
+      z-index: auto;
+    }
+  }
+
+  .form-inline &,
+  .form-inline &.form-control:not([class*="col-"]) {
+    width: auto;
+  }
+
   &:not(.input-group-btn),
   &[class*="col-"] {
     float: none;
@@ -149,6 +179,21 @@ select.selectpicker {
       line-height: inherit;
       border-radius: inherit;
     }
+  }
+
+  &.form-control-sm .dropdown-toggle,
+  &.form-control-lg .dropdown-toggle {
+    font-size: inherit;
+    line-height: inherit;
+    border-radius: inherit;
+  }
+
+  &.form-control-sm .dropdown-toggle {
+    padding: $input-padding-y-sm $input-padding-x-sm;
+  }
+
+  &.form-control-lg .dropdown-toggle {
+    padding: $input-padding-y-lg $input-padding-x-lg;
   }
 
   // Set the width of the live search (and any other form control within an inline form)
@@ -187,23 +232,38 @@ select.selectpicker {
     }
 
     .filter-option {
-      position: absolute;
+      position: static;
       top: 0;
       left: 0;
-      padding-top: inherit;
+      float: left;
       padding-right: inherit;
-      padding-bottom: inherit; // needed for proper alignment of show-menu-arrow
-      padding-left: inherit;
       height: 100%;
       width: 100%;
       text-align: left;
-    }
+      margin-right: -100%;
 
-    .filter-option-inner {
-      padding-right: inherit;
+      @at-root .input-group .bs3#{&} {
+        position: absolute;
+        padding-top: inherit;
+        padding-bottom: inherit;
+        padding-left: inherit;
+        float: none;
+
+        .filter-option-inner {
+          padding-right: inherit;
+        }
+      }
     }
 
     .filter-option-inner-inner {
+      overflow: hidden;
+    }
+
+    // used to expand the height of the button when inside an input group
+    .filter-expand {
+      width: 0.5px !important;
+      float: left;
+      opacity: 0 !important;
       overflow: hidden;
     }
 
@@ -247,7 +307,7 @@ select.selectpicker {
       position: relative;
 
       &.active small {
-        color: #fff;
+        color: $input-alt-color-placeholder !important;
       }
 
       &.disabled a {
