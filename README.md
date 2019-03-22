@@ -1,17 +1,6 @@
 # Bootstrap::Select::Rails
 
-Assets for https://github.com/silviomoreto/bootstrap-select - see it for details
-
-add to application.js and application.css something like
-
-    //= require bootstrap-select
-
-Also, you must require at least the *alert* and *dropdown* bootstrap components.
-For example, if using
-[bootstrap-sass](https://github.com/twbs/bootstrap-sass):
-
-    //= require bootstrap/alert
-    //= require bootstrap/dropdown
+Assets for https://github.com/snapappointments/bootstrap-select - see it for details
 
 ## Installation
 
@@ -29,7 +18,36 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Add 
+
+    //= require bootstrap-select
+
+to your `app/assets/javascripts/application.js`.
+
+Also, you must require at least the *alert* and *dropdown* bootstrap components.
+For example, if using
+[bootstrap-sass](https://github.com/twbs/bootstrap-sass):
+
+    //= require bootstrap/alert
+    //= require bootstrap/dropdown
+     
+Add 
+
+    *= require bootstrap-select
+    
+to your `app/assets/stylesheets/application.css`.
+
+If you are using SASS, add
+
+    @import 'bootstrap-select';
+
+to your `app/assets/stylesheets/application.scss`.
+
+
+To use it in your forms, add the `selectpicker` class to your `<select>` elements to auto-initialize bootstrap-select.
+
+## Known Issues
+If you use Turbolinks and the bootstrap-select's load events aren't firing, check [this issue](https://github.com/Slashek/bootstrap-select-rails/issues/31) for a potential solution.
 
 ## Contributing
 
